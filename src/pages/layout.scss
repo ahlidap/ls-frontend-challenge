@@ -1,0 +1,30 @@
+$nav-bgcolor: gray;
+
+$link-bgcolor: green;
+$link-bgcolor-hover: orange;
+
+nav {
+    height: 50px;
+    
+    background-color: $nav-bgcolor;
+
+    .navlink {
+        display: inline-flex;
+        position: relative;
+        text-decoration: none;
+        &:hover {
+            background-color: $link-bgcolor-hover;
+        }
+
+        a {
+            color: white;
+            line-height: 50px;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin: 0 15px 0 15px;
+    
+            
+        }
+    }
+    
+}
