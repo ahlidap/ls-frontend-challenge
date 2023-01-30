@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import api from "../../services/api"
 import Swal from 'sweetalert2'
 import './index.scss'
+import { WindmillSpinner } from 'react-spinner-overlay'
 
 function Home(props) {
     // Check if are coming back from user (ie. location.state exists)
@@ -14,6 +15,7 @@ function Home(props) {
         receivedQuery = location.state.query;
     }
 
+    const [loading, setLoading] = useState(false);
     const [page, setPagination] = useState(receivedPage ? receivedPage : 1)
     const [hasNext, setHasNext] = useState(false);
     const [message, setMessage] = useState(receivedQuery ? receivedQuery : "");
@@ -27,6 +29,7 @@ function Home(props) {
      */
     useEffect(() => {
         if(message.length) {
+            setLoading(true);
             api.get("search/users", {
                 params: {
                     q: message,
@@ -53,6 +56,8 @@ function Home(props) {
                     icon: 'error',
                     confirmButtonText: 'OK, I\'ll wait!'
                   });
+            }).finally(() => {
+                setLoading(false);
             })
         }
      }, [requestCount]);
@@ -147,6 +152,7 @@ function Home(props) {
             }}>
                 Fetch
             </button>
+            <WindmillSpinner size={28} loading={loading}/>
 
 
             <div className="list-container">
