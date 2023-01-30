@@ -31,7 +31,7 @@ function Show (props) {
                 confirmButtonText: 'OK, I\'ll wait!'
             });
         })
-    },[]);
+    }, [username]);
 
     /**
      * Handle going back to search page

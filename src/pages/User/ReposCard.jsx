@@ -1,11 +1,10 @@
 import React from "react"
-import { Fragment, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import api from "../../services/api"
 import Swal from 'sweetalert2'
 import "./reposcard.scss"
 
 function ReposCard (props) {
-    console.log(props)
     const [repos, setRepos] = useState([]);
     const [page, setPagination] = useState(1);
     const [hasNext, setHasNext] = useState(true);
@@ -24,7 +23,7 @@ function ReposCard (props) {
             if (!data.length) {
                 setHasNext(false);
             }
-            setRepos(repos.length ? repos.concat(data) : data);
+            setRepos(repos => repos.length ? repos.concat(data) : data);
         }).catch((error) => {
             let errorMessage = "Oops. Something went wrong!"
             if(error.response && error.response.data && error.response.data.message) {
@@ -37,7 +36,7 @@ function ReposCard (props) {
                 confirmButtonText: 'OK, I\'ll wait!'
             });
         })
-    },[page]);
+    },[page, props.userData.login]);
 
     const handleScroll = (event) => {
         let container = event.target;
@@ -53,7 +52,7 @@ function ReposCard (props) {
             return  repos.map((repo, idx) => {
                 return <div 
                     key={idx}
-                    className={ (repos.length == idx+1) ? "repo-entry last-entry" : "repo-entry"}
+                    className={ (repos.length === idx+1) ? "repo-entry last-entry" : "repo-entry"}
                     onClick={() => {window.open(repo.html_url, "_blank", "noreferrer");}}
                     >
                     
