@@ -10,7 +10,7 @@ function UserCard (props) {
         repoNumber = props.userData.public_repos
     }
     return(
-        <div className="user-card">
+        <div className="user-card" data-testid="user-card">
             <div 
                 className="image-container"
                 style={{

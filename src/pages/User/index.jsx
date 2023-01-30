@@ -12,7 +12,6 @@ function Show (props) {
 
     const location = useLocation();
     const navigate = useNavigate();
-    console.log('my location', location)
 
     useEffect(() => {
         api.get(`users/${username}`)

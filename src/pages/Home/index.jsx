@@ -132,6 +132,7 @@ function Home(props) {
     return (
         <Fragment>
             <h1>GitHub User Search</h1>
+            <label htmlFor="query">Search Query:</label>
             <input
                 id="query"
                 name="query"

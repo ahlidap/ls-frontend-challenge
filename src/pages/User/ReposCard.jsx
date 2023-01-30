@@ -51,6 +51,7 @@ function ReposCard (props) {
             
             return  repos.map((repo, idx) => {
                 return <div 
+                    data-testid="repo-entry"
                     key={idx}
                     className={ (repos.length === idx+1) ? "repo-entry last-entry" : "repo-entry"}
                     onClick={() => {window.open(repo.html_url, "_blank", "noreferrer");}}
@@ -65,7 +66,7 @@ function ReposCard (props) {
     }
 
     return(
-        <div className="repo-card" onScroll={handleScroll}>
+        <div className="repo-card" data-testid="repo-card" onScroll={handleScroll}>
             {getRepoList()}
         </div>
     );   
