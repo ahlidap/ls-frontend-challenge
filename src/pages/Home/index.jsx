@@ -122,7 +122,9 @@ function Home(props) {
     const renderBtnPrev = () => {
         if (page > 1) {
             return (
-                <button onClick={() => prevPage()}>Previous Page</button>
+                <div>
+                    <button onClick={() => prevPage()}>Previous Page</button>
+                </div>
             )
         }
     }
@@ -130,7 +132,9 @@ function Home(props) {
     const renderBtnNext = () => {
         if (hasNext) {
             return (
-                <button onClick={() => nextPage()}>Next Page</button>
+                <div>
+                    <button onClick={() => nextPage()}>Next Page</button>
+                </div>
             )
         }
     }
@@ -172,17 +176,9 @@ function Home(props) {
             </div>
 
             <div className="pagination">
-                <div>
-                    {renderBtnNext()}
-                </div>
-
-                
+                {renderBtnPrev()}
                 {renderPaginationStatus()}
-                
-
-                <div>
-                    {renderBtnNext()}
-                </div>
+                {renderBtnNext()}
             </div>
             
             
