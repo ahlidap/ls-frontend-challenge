@@ -81,7 +81,7 @@ You can run the tests with the following command:
 npm test
 ```
 
-Please note, tests will made API requests.\
+Please note, tests will perform API requests.\
 Internet connectinon is mandatory, or tests will fail.\
 Keep in mind, tests are also subject to the API rate limit.
 
