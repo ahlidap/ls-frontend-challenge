@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# 🎓 LS Frontend Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the following command:
 
-## Available Scripts
+```
+npx create-react-app ls-frontend-challenge
+```
 
-In the project directory, you can run:
+<hr>
 
-### `npm start`
+## 🖵 Live Preview
 
-Runs the app in the development mode.\
+A live preview is available at [https://frontend-challenge.ddns.net/](https://frontend-challenge.ddns.net/)
+
+
+<video controls style="width:640px; height: auto;">
+  <source src="./src/assets/recorded_live_demo.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+App built with:
+```
+npm run build
+```
+
+and deployed with [PM2](https://pm2.keymetrics.io/)
+```
+pm2 serve build/ 3000 --name "ls-frontend-challenge" --spa
+```
+
+Served via [lighttpd](https://www.lighttpd.net/) on external port :80 with proxy to internal port :3000 \
+Secured with SSL certificate issued by [Let's Encrypt](https://letsencrypt.org/) using [certbot](https://certbot.eff.org/)
+
+<hr>
+
+## ⚠️ Requirements
+
+Recommended nodejs version:
+
+```
+$ node -v
+v18.13.0
+```
+
+Lowest nodejs version in which the project was tested:
+
+```
+$ node -v
+v14.21.2
+```
+
+<hr>
+
+## Some additional modules that worth mentioning
+
+- react-router-dom
+- sass
+<hr>
+
+## 🔧 How to run
+
+Please ensure you have nodejs installed in your system. 18.x 
+[Check official website](https://nodejs.org/en/) for more info.
+
+Follow the following instructions to checkout and run the app in development mode.
+```
+$ git clone https://github.com/ahlidap/ls-frontend-challenge.git ls-frontend-challenge
+$ cd ls-frontend-challenge
+$ npm install
+$ npm start
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<hr>
 
-### `npm test`
+## 🧪 Testing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can run the tests with the following command:
+```
+npm test
+```
 
-### `npm run build`
+Please note, tests will made API requests.\
+Internet connectinon is mandatory, or tests will fail.\
+Keep in mind, tests are also subject to the API rate limit.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="./src/assets/tests_passed.png">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<hr>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📜 Quick Notes
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Used react-router-dom to manage routing
+- - 404 Page available to unknown routes. eg. [http://localhost:3000/thisdoesnotexists](http://localhost:3000/thisdoesnotexists)
+- Pressing "Enter" key on the text input element, will trigger the search
+- Button driven pagination on the user search page (Home)
+- Infinite Scroll pagination on the Repo Listing under the user page
