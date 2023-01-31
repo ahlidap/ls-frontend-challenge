@@ -8,6 +8,7 @@ function ReposCard (props) {
     const [repos, setRepos] = useState([]);
     const [page, setPagination] = useState(1);
     const [hasNext, setHasNext] = useState(true);
+    const [loadingData, setLoadingData] = useState(false);
     
     useEffect(() => {
         api.get(`users/${props.userData.login}/repos`, {
@@ -23,6 +24,7 @@ function ReposCard (props) {
             if (!data.length) {
                 setHasNext(false);
             }
+            setLoadingData(false);
             setRepos(repos => repos.length ? repos.concat(data) : data);
         }).catch((error) => {
             let errorMessage = "Oops. Something went wrong!"
@@ -35,13 +37,18 @@ function ReposCard (props) {
                 icon: 'error',
                 confirmButtonText: 'OK, I\'ll wait!'
             });
+            setLoadingData(false);
         })
     },[page, props.userData.login]);
 
     const handleScroll = (event) => {
         let container = event.target;
-        if (hasNext && (container.offsetHeight + container.scrollTop >= container.scrollHeight)) {
-            setPagination(page+1);
+        let offset = 150; // Offset to trigger next page fetch, beforereaching bottom of container
+        if (hasNext && (container.offsetHeight + container.scrollTop >= container.scrollHeight - offset)) {
+            if(!loadingData) {
+                setLoadingData(true);
+                setPagination(page+1);
+            }
         }
     }
 
