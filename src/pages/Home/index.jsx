@@ -120,23 +120,41 @@ function Home(props) {
     }
 
     const renderBtnPrev = () => {
+        let renderObj;
         if (page > 1) {
-            return (
+            renderObj = (
                 <div>
                     <button onClick={() => prevPage()}>Previous Page</button>
                 </div>
             )
+        } else {
+            renderObj = (
+                <div>
+                    &nbsp;
+                </div>
+            )
         }
+
+        return renderObj;
     }
 
     const renderBtnNext = () => {
+        let renderObj;
         if (hasNext) {
-            return (
+            renderObj = (
                 <div>
                     <button onClick={() => nextPage()}>Next Page</button>
                 </div>
             )
+        } else {
+            renderObj = (
+                <div>
+                    &nbsp;
+                </div>
+            )
         }
+
+        return renderObj;
     }
 
     const renderPaginationStatus = () => {
