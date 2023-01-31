@@ -17,6 +17,7 @@ function Home(props) {
 
     const [loading, setLoading] = useState(false);
     const [page, setPagination] = useState(receivedPage ? receivedPage : 1)
+    const [lastPage, setLastPage] = useState(1); 
     const [hasNext, setHasNext] = useState(false);
     const [message, setMessage] = useState(receivedQuery ? receivedQuery : "");
     const [users, setUsers] = useState([]);
@@ -40,7 +41,9 @@ function Home(props) {
                 }
             }).then((response) => {
                 let data = response.data;
-                setHasNext( page < data.total_count / process.env.REACT_APP_ITEMS_PER_PAGE);
+                let nPages = Math.ceil(data.total_count / process.env.REACT_APP_ITEMS_PER_PAGE)
+                setLastPage(nPages);
+                setHasNext( page < nPages);
                 setUsers(data);
             }).catch((error) => {
                 
@@ -132,6 +135,15 @@ function Home(props) {
         }
     }
 
+    const renderPaginationStatus = () => {
+        if (users && users.items && users.items.length) {
+            return (
+                <div>
+                    {page} / {lastPage}
+                </div>
+            )
+        }
+    }
     
         
     return (
@@ -159,12 +171,18 @@ function Home(props) {
                 {getUsers()}
             </div>
 
-            <div>
-                {renderBtnPrev()}
-            </div>
+            <div className="pagination">
+                <div>
+                    {renderBtnNext()}
+                </div>
 
-            <div>
-                {renderBtnNext()}
+                
+                {renderPaginationStatus()}
+                
+
+                <div>
+                    {renderBtnNext()}
+                </div>
             </div>
             
             

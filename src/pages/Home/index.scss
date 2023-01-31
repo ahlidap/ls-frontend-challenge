@@ -3,6 +3,14 @@ $back-btn-bg1: orange;
 $back-btn-bg2: white;
 $stripe-bg-color: rgb(231, 229, 229);
 
+.pagination {
+    display: flex;
+    margin: 10px 0 10px 0;
+    div {
+        text-align: center;
+        width:33%;
+    }
+}
 .go-back {
     display: inline-flex;
     padding: 10px;
