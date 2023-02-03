@@ -1,0 +1,12 @@
+- Home layout refactor. Search API Refactor to wait for response
+- small fix README.md
+- README.md
+- fix pagination
+- fix pagination
+- added pagination numbers
+- Added infinite scroll loading controll and offset
+- favicon
+- small spinner | loader
+- Added Jest Testing
+- fix warnings
+- First commig - already working version
