@@ -1,3 +1,5 @@
+@import '../mixins.scss';
+
 $list-item-bgcolor-hover: rgb(207, 199, 199);
 $back-btn-bg1: orange;
 $back-btn-bg2: white;
@@ -14,7 +16,7 @@ $stripe-bg-color: rgb(231, 229, 229);
 .go-back {
     display: inline-flex;
     padding: 10px;
-    margin-top: 15px;
+    margin-top: 10px;
     background-color: $back-btn-bg1;
     border: 2px solid $back-btn-bg2;
 
@@ -32,7 +34,7 @@ h1.user-info {
 .list-container {
     border: 2px solid black;
     margin-top: 25px;
-    border-radius: 10px;
+    border-radius: $main-border-radius;
     max-height: calc(100vh - 300px);
     overflow-y: auto;
     

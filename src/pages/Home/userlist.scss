@@ -1,0 +1,62 @@
+@import '../../pages/mixins.scss';
+
+$bg-color: white;
+$input-focus-border-color: #8EC5FC;
+$input-btn-height: 40px;
+
+.user-list-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+    
+    
+
+    .user {
+        display: flex;
+        
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid white;
+        border-radius: $main-border-radius;
+        background-color: $bg-color;
+        margin-bottom: $main-margin-bottom;
+        width: 100%;
+        max-width: 350px;
+        min-height: 250px;
+
+        .avatar {
+            border: 1px solid $input-focus-border-color;
+            margin-top: 10px;
+            width: 125px;
+            height: 125px;
+            border-radius: 125px
+        }
+
+        &:hover {
+            scale: 1.05;
+            border: 1px solid black;
+        }
+
+        .user-login {
+            margin-top: 10px;
+        }
+        .view-user-btn {
+            cursor: pointer;
+            margin-top: 25px;
+        }
+
+    }
+    
+}
+
+
+@media (max-width: 760px) {
+    .user-list-container {
+        .user {
+            max-width: 100%;
+        }
+    }
+}

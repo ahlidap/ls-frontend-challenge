@@ -1,10 +1,13 @@
 import React from "react"
 import { Fragment, useEffect, useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { WindmillSpinner } from 'react-spinner-overlay'
 import api from "../../services/api"
 import Swal from 'sweetalert2'
+import UserSearch from './UserSearch'
+import UserList from './UserList'
+import Pagination from './Pagination'
 import './index.scss'
-import { WindmillSpinner } from 'react-spinner-overlay'
 
 function Home(props) {
     // Check if are coming back from user (ie. location.state exists)
@@ -21,7 +24,7 @@ function Home(props) {
     const [hasNext, setHasNext] = useState(false);
     const [message, setMessage] = useState(receivedQuery ? receivedQuery : "");
     const [users, setUsers] = useState([]);
-    const [requestCount, setRequestCount] = useState(0);
+    const [triggerSearch, setTrigerSearch] = useState(false);
     const  navigate = useNavigate();
 
     /**
@@ -30,25 +33,31 @@ function Home(props) {
      */
     useEffect(() => {
         if(message.length) {
-            setLoading(true);
-            api.get("search/users", {
-                params: {
-                    q: message,
-                    per_page: process.env.REACT_APP_ITEMS_PER_PAGE,
-                    page: page,
-                    sort: "joined",
-                    order: "desc"
-                }
-            }).then((response) => {
+            //setLoading(true);
+
+            const fetchData = async () => {
+                let response = await api.get("search/users", {
+                    params: {
+                        q: message,
+                        per_page: process.env.REACT_APP_ITEMS_PER_PAGE,
+                        page: page,
+                        sort: "joined",
+                        order: "desc"
+                    }
+                });
                 let data = response.data;
                 let nPages = Math.ceil(data.total_count / process.env.REACT_APP_ITEMS_PER_PAGE)
                 setLastPage(nPages);
                 setHasNext( page < nPages);
                 setUsers(data);
-            }).catch((error) => {
-                
-                // TODO : Handle page count on error, should revert to previous stage
 
+                const element = document.getElementById('fetch-btn');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            
+            fetchData().catch( error => {
                 let errorMessage = "Oops. Something went wrong!"
                 if(error.response && error.response.data && error.response.data.message) {
                     errorMessage = error.response.data.message;
@@ -61,9 +70,10 @@ function Home(props) {
                   });
             }).finally(() => {
                 setLoading(false);
+
             })
         }
-     }, [requestCount]);
+     }, [triggerSearch]);
 
 
     /**
@@ -79,7 +89,7 @@ function Home(props) {
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             setPagination(1);
-            setRequestCount(requestCount+1);
+            setTrigerSearch(!triggerSearch);
         }
     };
 
@@ -88,116 +98,41 @@ function Home(props) {
      */
     const showUser = (username) => {
         navigate(`/user/${username}`, {state:{query: message, pageNumber: page}});
-    }
+    }    
 
-    const getUsers = () => {
-        if(users && users.items && users.items.length) {
-            
-            return  users.items.map((user, idx) => {
-                return <p
-                    key={idx} 
-                    className="list-item" 
-                    onClick={() => showUser(user.login, user.avatar_url)}
-                    >
-                    <strong>{user.login}</strong> - {user.url}
-                </p>
-            });
-        }
-        return <p>No results yet.. Try to search something</p>
-    }
-
-    /*
-    Handle paginaion buttons and actions
-    */
-    const nextPage = () => {
-        setPagination(page + 1);
-        setRequestCount(requestCount+1);
-    }
-
-    const prevPage = () =>  {
-        setPagination(page -1);
-        setRequestCount(requestCount+1);
-    }
-
-    const renderBtnPrev = () => {
-        let renderObj;
-        if (page > 1) {
-            renderObj = (
-                <div>
-                    <button onClick={() => prevPage()}>Previous Page</button>
-                </div>
-            )
-        } else {
-            renderObj = (
-                <div>
-                    &nbsp;
-                </div>
-            )
-        }
-
-        return renderObj;
-    }
-
-    const renderBtnNext = () => {
-        let renderObj;
-        if (hasNext) {
-            renderObj = (
-                <div>
-                    <button onClick={() => nextPage()}>Next Page</button>
-                </div>
-            )
-        } else {
-            renderObj = (
-                <div>
-                    &nbsp;
-                </div>
-            )
-        }
-
-        return renderObj;
-    }
-
-    const renderPaginationStatus = () => {
-        if (users && users.items && users.items.length) {
-            return (
-                <div>
-                    {page} / {lastPage}
-                </div>
-            )
-        }
+    const doSearch = () => {
+        setPagination(1);
+        setTrigerSearch(!triggerSearch);
     }
     
         
     return (
         <Fragment>
-            <h1>GitHub User Search</h1>
-            <label htmlFor="query">Search Query:</label>
-            <input
-                id="query"
-                name="query"
-                type="text"
-                value={message}
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-            />
-            <button onClick={() => {
-                setPagination(1);
-                setRequestCount(requestCount+1);
-            }}>
-                Fetch
-            </button>
+            
             <WindmillSpinner size={28} loading={loading}/>
 
 
-            <div className="list-container">
-                {getUsers()}
-            </div>
+            <UserSearch 
+                message = {message}
+                handleChange = {handleChange}
+                handleKeyDown = {handleKeyDown}
+                doSearch = {doSearch}
+            />
 
-            <div className="pagination">
-                {renderBtnPrev()}
-                {renderPaginationStatus()}
-                {renderBtnNext()}
-            </div>
+            <UserList
+                users = {users}
+                userClickAction = {showUser}
+            />
+
+            <Pagination 
+                page = {page}
+                lastPage = {lastPage}
+                hasNext = {hasNext}
+                users = {users}
+                triggerSearch = {triggerSearch}
+                setPagination = {setPagination}
+                setTrigerSearch = {setTrigerSearch}
+            />
             
             
         </Fragment>

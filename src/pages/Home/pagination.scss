@@ -1,0 +1,14 @@
+@import '../../pages/mixins.scss';
+$bg-color: white;
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    margin-bottom: $main-margin-bottom;
+    background-color: $bg-color;
+    border-radius: $main-border-radius;
+
+
+}

@@ -1,0 +1,29 @@
+$main-max-width: 1200px;
+$main-border-radius: 10px;
+$main-margin-bottom: 25px;
+
+// Source: https://cssgradient.io/gradient-backgrounds/
+$main-bg-color: #8EC5FC;
+$main-bg-gradient: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+
+
+$btn-bg: #8EC5FC;
+$btn-hover-bordercolor: #8EC5FC;
+
+$input-btn-height: 40px;
+
+.btn1 {
+    text-transform: uppercase;
+    font-weight: bolder;
+    height: $input-btn-height;
+    border-radius: $main-border-radius;
+    border: none;
+    padding: 0 15px 0 15px;
+    background-color: $btn-bg;
+    border: 1px solid white;
+    &:hover {
+        cursor: pointer;
+        border: 1px solid $btn-bg;
+        background-color: unset;
+    }
+}

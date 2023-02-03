@@ -1,3 +1,5 @@
+@import '../mixins.scss';
+
 $list-item-bgcolor-hover: rgb(207, 199, 199);
 $name-font-size: 16px;
 $description-font-size: 14px;
@@ -7,7 +9,7 @@ $stripe-bg-color: rgb(231, 229, 229);
     //display: flex;
     border: 2px solid black;
     margin-top: 25px;
-    border-radius: 10px;
+    border-radius: $main-border-radius;
     
     max-height: calc(100vh - 400px);
     overflow-y: auto;

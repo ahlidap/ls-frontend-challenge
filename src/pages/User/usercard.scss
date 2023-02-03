@@ -1,10 +1,12 @@
+@import '../mixins.scss';
+
 $list-item-bgcolor-hover: rgb(207, 199, 199);
 
 .user-card {
     display: flex;
     border: 2px solid black;
     margin-top: 25px;
-    border-radius: 10px;
+    border-radius: $main-border-radius;
     
     .image-container {
         flex:1;
