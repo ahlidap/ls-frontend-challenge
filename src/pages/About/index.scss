@@ -1,0 +1,23 @@
+@import '../mixins.scss';
+
+
+
+.base-card {
+    margin-top: $main-margin-top;
+
+    .header-text {
+        padding: 30px;
+
+        .title {
+            font-size: 1.5rem;
+        }
+
+        .sub-title {
+            font-size: 1rem;
+            margin: 0;
+            font-style: italic;
+        } 
+        
+        
+    }
+}

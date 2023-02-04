@@ -1,58 +1,10 @@
 @import '../mixins.scss';
 
-$list-item-bgcolor-hover: rgb(207, 199, 199);
-$back-btn-bg1: orange;
-$back-btn-bg2: white;
-$stripe-bg-color: rgb(231, 229, 229);
-
 .pagination {
     display: flex;
     margin: 10px 0 10px 0;
     div {
         text-align: center;
         width:33%;
-    }
-}
-.go-back {
-    display: inline-flex;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: $back-btn-bg1;
-    border: 2px solid $back-btn-bg2;
-
-    &:hover {
-        cursor: pointer;
-        background-color: $back-btn-bg2;
-        border: 2px solid $back-btn-bg1;
-    }
-}
-
-h1.user-info {
-    text-align: center;
-    text-transform: capitalize;
-}
-.list-container {
-    border: 2px solid black;
-    margin-top: 25px;
-    border-radius: $main-border-radius;
-    max-height: calc(100vh - 300px);
-    overflow-y: auto;
-    
-    .list-item {
-        margin: 0;
-        padding: 10px;
-        min-height: 35px;
-        
-        &:hover {
-            cursor: pointer;
-            box-shadow: inset 0 3px 10px black;
-        }
-
-        &:nth-child(even) {
-            background-color: $stripe-bg-color;
-        }
-
-        word-break: break-all;
-        
     }
 }

@@ -4,7 +4,7 @@ function NotFound () {
     return(
         <div>
             <h1>Are you lost..?</h1>
-            <img src={tuxGif} alt="404 gif" />
+            <img src={tuxGif} alt='404 gif' />
         </div>
         
     );   

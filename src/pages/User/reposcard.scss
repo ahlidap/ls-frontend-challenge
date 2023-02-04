@@ -7,16 +7,35 @@ $stripe-bg-color: rgb(231, 229, 229);
 
 .repo-card {
     //display: flex;
-    border: 2px solid black;
-    margin-top: 25px;
+    margin: 25px 0 25px 0;
     border-radius: $main-border-radius;
     
-    max-height: calc(100vh - 400px);
-    overflow-y: auto;
+    
+    overflow: hidden;
+
+
+    .repo-header {
+        padding: 15px 30px 15px 30px;
+        border-bottom: 2px solid black;
+        display: flex;
+        justify-content: flex-start;
+
+        .repo-col {
+            font-weight: bolder;
+            min-width: 50%;
+            margin-right: 10px;
+        }
+
+    }
     
     .repo-entry {
-        padding: 10px;
-        min-height: 35px;
+        padding: 15px 30px 15px 30px;
+        min-height: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: space-start;
+        
+        
         
         &:hover {
             cursor: pointer;
@@ -30,9 +49,10 @@ $stripe-bg-color: rgb(231, 229, 229);
         
         
         .repo-name {
-            display: block;
+            min-width: 50%;
             font-size: $name-font-size;
-            font-weight: bolder;
+            word-break: break-word;
+            margin-right: 10px;
         }
         .repo-description {
             font-style: italic;

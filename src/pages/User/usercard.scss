@@ -1,27 +1,37 @@
 @import '../mixins.scss';
 
 $list-item-bgcolor-hover: rgb(207, 199, 199);
-
+$bg-color: white;
+$avatar-size: 150px;
 .user-card {
+    background-color: $bg-color;
     display: flex;
-    border: 2px solid black;
+    //flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     margin-top: 25px;
     border-radius: $main-border-radius;
     
-    .image-container {
-        flex:1;
-        height: 100px;
-        max-width: 100px;
-        background-size: contain;
-        background-repeat: no-repeat;
+    .avatar {
+        height: $avatar-size;
+        max-width: $avatar-size;
+        border-radius: $avatar-size;
         margin:10px;
     }
 
     .info-container {
-        flex: 2;
+        display: flex;
         .data-title {
+            text-transform: uppercase;
             font-weight: bolder;
             margin-right: 10px;
+
         }
+    }
+}
+
+@media (max-width: 760px) {
+    .user-card {
+        flex-direction: column;
     }
 }

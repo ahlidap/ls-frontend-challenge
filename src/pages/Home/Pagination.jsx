@@ -1,5 +1,5 @@
-import React from "react"
-import "./pagination.scss"
+import React from 'react'
+import './pagination.scss'
 
 function Pagination (props) {
     const setPagination = props.setPagination;
@@ -25,7 +25,7 @@ function Pagination (props) {
         if (page > 1) {
             renderObj = (
                 <div>
-                    <button className="prev-btn btn1" onClick={() => prevPage()}>Previous Page</button>
+                    <button className='prev-btn btn1' onClick={() => prevPage()}>Previous Page</button>
                 </div>
             )
         } else {
@@ -44,7 +44,7 @@ function Pagination (props) {
         if (hasNext) {
             renderObj = (
                 <div>
-                    <button className="next-btn btn1" onClick={() => nextPage()}>Next Page</button>
+                    <button className='next-btn btn1' onClick={() => nextPage()}>Next Page</button>
                 </div>
             )
         } else {
@@ -70,7 +70,7 @@ function Pagination (props) {
 
 
     return(
-        <div className="pagination">
+        <div className='base-card pagination'>
             {renderBtnPrev()}
             {renderPaginationStatus()}
             {renderBtnNext()}

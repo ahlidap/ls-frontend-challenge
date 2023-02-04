@@ -1,33 +1,58 @@
-import React from "react"
-import { useEffect, useState} from "react";
-import api from "../../services/api"
+import React from 'react'
+import { useEffect, useState, useRef} from 'react';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import api from '../../services/api'
 import Swal from 'sweetalert2'
-import "./reposcard.scss"
+import './reposcard.scss'
 
 function ReposCard (props) {
     const [repos, setRepos] = useState([]);
     const [page, setPagination] = useState(1);
     const [hasNext, setHasNext] = useState(true);
-    const [loadingData, setLoadingData] = useState(false);
+    const loading = useRef(false);
+
+    /**
+     * handles Scroll for infine scroll
+     */
+    const handleScroll = () => {
+        if (hasNext && !loading.current) {
+            setPagination(page+1);
+        }
+    }
+    useBottomScrollListener(handleScroll, {
+        offset: 200 // offset to fire event before reaching bottom of page
+    });
     
-    useEffect(() => {
-        api.get(`users/${props.userData.login}/repos`, {
-            params: {
-                per_page: process.env.REACT_APP_ITEMS_PER_PAGE,
-                page: page,
-                sort: "updated",
-                order: "desc"
-            }
-        })
-        .then((response) => {
+    // Fetch repos data from API
+    const fetchRepos = async () => {
+        if (!loading.current) {
+            loading.current = true;
+            let response = await api.get(`users/${props.userData.login}/repos`, {
+                params: {
+                    per_page: process.env.REACT_APP_ITEMS_PER_PAGE,
+                    page: page,
+                    sort: 'updated',
+                    order: 'desc'
+                }
+            });
+
             let data = response.data;
             if (!data.length) {
                 setHasNext(false);
             }
-            setLoadingData(false);
+
             setRepos(repos => repos.length ? repos.concat(data) : data);
-        }).catch((error) => {
-            let errorMessage = "Oops. Something went wrong!"
+            loading.current = false;
+        }
+    }
+
+    
+
+    useEffect(() => {
+        fetchRepos(page)
+        .catch(error => {
+            loading.current = false;
+            let errorMessage = 'Oops. Something went wrong!'
             if(error.response && error.response.data && error.response.data.message) {
                 errorMessage = error.response.data.message;
             }
@@ -37,44 +62,45 @@ function ReposCard (props) {
                 icon: 'error',
                 confirmButtonText: 'OK, I\'ll wait!'
             });
-            setLoadingData(false);
-        })
+        });
     },[page, props.userData.login]);
 
-    const handleScroll = (event) => {
-        let container = event.target;
-        let offset = 150; // Offset to trigger next page fetch, beforereaching bottom of container
-        if (hasNext && (container.offsetHeight + container.scrollTop >= container.scrollHeight - offset)) {
-            if(!loadingData) {
-                setLoadingData(true);
-                setPagination(page+1);
-            }
-        }
-    }
-
-
-    const getRepoList = () => {
+    /**
+     * Process data for rendering
+     */
+    const renderRepoList = () => {
         if(repos && repos.length) {
             
             return  repos.map((repo, idx) => {
                 return <div 
-                    data-testid="repo-entry"
+                    data-testid='repo-entry'
                     key={idx}
-                    className={ (repos.length === idx+1) ? "repo-entry last-entry" : "repo-entry"}
-                    onClick={() => {window.open(repo.html_url, "_blank", "noreferrer");}}
+                    className='repo-entry'
+                    onClick={() => {window.open(repo.html_url, '_blank', 'noreferrer');}}
                     >
                     
-                    <span className="repo-name">{repo.name}</span>
-                    <span>{repo.description}</span>
+                    <div className='repo-name'>{repo.name}</div>
+                    <div>{repo.description}</div>
                 </div>
             });
         }
-        return <p>No repos found.</p>
+        return <p><center>No repos found.</center></p>
     }
 
     return(
-        <div className="repo-card" data-testid="repo-card" onScroll={handleScroll}>
-            {getRepoList()}
+        <div
+            id='repo-card'
+            className='base-card repo-card'
+            data-testid='repo-card'
+            onScroll={handleScroll}>
+            
+            <div className='repo-header'>
+                <div className='repo-col'>Name</div>
+                <div className='repo-col'>Description</div>
+            </div>
+            <div>
+                {renderRepoList()}
+            </div>
         </div>
     );   
 }

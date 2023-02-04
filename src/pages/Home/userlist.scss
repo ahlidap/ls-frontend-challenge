@@ -1,6 +1,5 @@
 @import '../../pages/mixins.scss';
 
-$bg-color: white;
 $input-focus-border-color: #8EC5FC;
 $input-btn-height: 40px;
 
@@ -20,8 +19,6 @@ $input-btn-height: 40px;
         align-items: center;
         flex-direction: column;
         border: 1px solid white;
-        border-radius: $main-border-radius;
-        background-color: $bg-color;
         margin-bottom: $main-margin-bottom;
         width: 100%;
         max-width: 350px;

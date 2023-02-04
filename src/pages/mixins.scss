@@ -1,16 +1,25 @@
 $main-max-width: 1200px;
 $main-border-radius: 10px;
+$main-margin-top: 25px;
 $main-margin-bottom: 25px;
+$main-blue: #8EC5FC;
 
 // Source: https://cssgradient.io/gradient-backgrounds/
 $main-bg-color: #8EC5FC;
-$main-bg-gradient: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+$main-bg-gradient: linear-gradient(62deg, $main-blue 0%, #E0C3FC 100%);
 
-
-$btn-bg: #8EC5FC;
-$btn-hover-bordercolor: #8EC5FC;
-
+$btn-bg: $main-blue;
+$btn-hover-bordercolor: $main-blue;
 $input-btn-height: 40px;
+
+$list-item-bgcolor-hover: rgb(207, 199, 199);
+$stripe-bg-color: rgb(231, 229, 229);
+
+
+.base-card {
+    background-color: white;
+    border-radius: $main-border-radius;
+}
 
 .btn1 {
     text-transform: uppercase;
@@ -25,5 +34,26 @@ $input-btn-height: 40px;
         cursor: pointer;
         border: 1px solid $btn-bg;
         background-color: unset;
+    }
+}
+
+$btn2-bg1: #6A67EA;
+$btn2-bg2: white;
+$btn2-fontcolor: white;
+$btn2-fontcolor-hover: #6A67EA;
+.btn2 {
+    color: white;
+    border-radius: $main-border-radius;
+    display: inline-flex;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: $btn2-bg1;
+    border: 2px solid $btn2-bg2;
+
+    &:hover {
+        cursor: pointer;
+        color: $btn2-fontcolor-hover;
+        background-color: $btn2-bg2;
+        border: 2px solid $btn2-bg1;
     }
 }
