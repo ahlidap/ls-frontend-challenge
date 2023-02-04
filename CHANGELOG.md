@@ -1,3 +1,6 @@
+- fix testes
+- await API Requests. Refactor Components. Responsive Layout implementation
+- changelog
 - Home layout refactor. Search API Refactor to wait for response
 - small fix README.md
 - README.md
