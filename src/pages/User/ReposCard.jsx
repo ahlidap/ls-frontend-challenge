@@ -30,7 +30,7 @@ function ReposCard (props) {
         
     }
     useBottomScrollListener(handleScroll, {
-        debounce: 500, // Doesn't seem to
+        debounce: 500, // Doesn't seem to work (plugin bug?)
         offset: 200, // offset to fire event before reaching bottom of page
         triggerOnNoScroll: true
     });
