@@ -92,7 +92,7 @@ function ReposCard (props) {
                     >
                     
                     <div className='repo-name'>{repo.name}</div>
-                    <div>{repo.description}</div>
+                    <div className='repo-description'>{repo.description}</div>
                 </div>
             });
         }
