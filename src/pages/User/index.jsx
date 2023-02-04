@@ -33,7 +33,7 @@ function Show (props) {
                     title: 'Error!',
                     text: errorMessage,
                     icon: 'error',
-                    confirmButtonText: 'OK, I\'ll wait!'
+                    confirmButtonText: 'OK!'
                 });
             }).finally( () => {
                 loading.current = false;
@@ -46,7 +46,7 @@ function Show (props) {
      * Previously received 'username' and 'page' are sent back to achieve previous state
      */
     const goBack = () => {
-        navigate(`/`, {state:{query: location.state.query, pageNumber: location.state.pageNumber}});
+        navigate(`/`, userData ? {state:{query: location.state.query, pageNumber: location.state.pageNumber}} : {});
     }
     
     /**

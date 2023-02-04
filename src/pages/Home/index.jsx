@@ -68,7 +68,7 @@ function Home(props) {
                     title: 'Error!',
                     text: errorMessage,
                     icon: 'error',
-                    confirmButtonText: 'OK, I\'ll wait!'
+                    confirmButtonText: 'OK!'
                 });
             }).finally(() => {
                 loading.current = false;

@@ -30,7 +30,7 @@ function ReposCard (props) {
         
     }
     useBottomScrollListener(handleScroll, {
-        debounce: 500, // Doesn't seem to work
+        debounce: 500, // Doesn't seem to
         offset: 200, // offset to fire event before reaching bottom of page
         triggerOnNoScroll: true
     });
@@ -72,7 +72,7 @@ function ReposCard (props) {
                 title: 'Error!',
                 text: errorMessage,
                 icon: 'error',
-                confirmButtonText: 'OK, I\'ll wait!'
+                confirmButtonText: 'OK!'
             });
         });
     },[page, props.userData.login]);
