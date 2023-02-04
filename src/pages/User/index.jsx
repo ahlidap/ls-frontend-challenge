@@ -63,8 +63,9 @@ function Show (props) {
             );    
         } else {
             return (
-                
-                <h1>User not found</h1>
+                <div className='base-card'>
+                    <center><h1>User not found</h1></center>
+                </div>
             )
         }
     }

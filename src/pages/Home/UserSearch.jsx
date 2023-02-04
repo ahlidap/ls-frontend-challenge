@@ -17,6 +17,7 @@ function UserSearch (props) {
             <div className='search'>
                 <input
                     className='search-input'
+                    data-testid='search-input'
                     id='query'
                     name='query'
                     type='text'

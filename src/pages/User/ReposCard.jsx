@@ -84,7 +84,7 @@ function ReposCard (props) {
                 </div>
             });
         }
-        return <p><center>No repos found.</center></p>
+        return <center><p>No repos found.</p></center>
     }
 
     return(
