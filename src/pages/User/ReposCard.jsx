@@ -15,12 +15,24 @@ function ReposCard (props) {
      * handles Scroll for infine scroll
      */
     const handleScroll = () => {
-        if (hasNext && !loading.current) {
-            setPagination(page+1);
+        /**
+         * Dirty solution
+         * built in debounce timer from 'react-bottom-scroll-listener' doesn't seem to work
+         */
+        if (window.test) {
+            clearTimeout(window.test);
         }
+        window.test = setTimeout(() => {
+            if (hasNext && !loading.current) {
+                setPagination(page+1);
+            }
+        }, 500);
+        
     }
     useBottomScrollListener(handleScroll, {
-        offset: 200 // offset to fire event before reaching bottom of page
+        debounce: 500, // Doesn't seem to work
+        offset: 200, // offset to fire event before reaching bottom of page
+        triggerOnNoScroll: true
     });
     
     // Fetch repos data from API
